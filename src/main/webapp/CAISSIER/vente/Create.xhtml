@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="VenteCreateDlg" widgetVar="VenteCreateDialog" modal="true" resizable="false" appendToBody="true" header="#{myBundle.CreateVenteTitle}">
+
+            <h:form id="VenteCreateForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{venteController.selected != null}">
+
+                        <p:outputLabel value="#{myBundle.CreateVenteLabel_dateRecette}" for="dateRecette" />
+                        <p:calendar id="dateRecette" pattern="MM/dd/yyyy" value="#{venteController.selected.dateRecette}" title="#{myBundle.EditVenteTitle_dateRecette}"  showOn="button"/>
+
+                        <p:outputLabel value="#{myBundle.CreateVenteLabel_quantite}" for="quantite" />
+                        <p:inputText id="quantite" value="#{venteController.selected.quantite}" title="#{myBundle.CreateVenteTitle_quantite}" required="true" requiredMessage="#{myBundle.CreateVenteRequiredMessage_quantite}"/>
+
+                        <p:outputLabel value="#{myBundle.CreateVenteLabel_produitId}" for="produitId" />
+                        <p:selectOneMenu id="produitId" value="#{venteController.selected.produitId}" required="true" requiredMessage="#{myBundle.EditVenteRequiredMessage_produitId}">
+                            <f:selectItem itemLabel="#{myBundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{produitController.items}"
+                                           var="produitIdItem"
+                                           itemValue="#{produitIdItem}"
+                                           itemLabel="#{produitIdItem.id.toString()}"
+                                           />
+                            <f:converter binding="#{produitConverter}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{venteController.saveNew}" value="#{myBundle.Save}" update="display,:VenteListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,VenteCreateDialog);"/>
+                    <p:commandButton value="#{myBundle.Cancel}" onclick="VenteCreateDialog.hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ProduitViewDlg" widgetVar="ProduitViewDialog" modal="true" resizable="false" appendToBody="true" header="#{myBundle.ViewProduitTitle}">
+
+            <h:form id="ProduitViewForm">
+
+                <h:panelGroup id="display">
+                   <p:panelGrid columns="2" rendered="#{produit.selectedprod != null}">
+
+                 <h:outputText value="#{myBundle.ViewProduitLabel_pu}"/>
+                        <h:outputText value="#{produit.selectedprod.PU}" title="#{myBundle.ViewProduitTitle_pu}"/>
+
+                        <h:outputText value="#{myBundle.ViewProduitLabel_code}"/>
+                        <h:outputText value="#{produit.selectedprod.code}" title="#{myBundle.ViewProduitTitle_code}"/>
+
+                 
+
+                        <h:outputText value="#{myBundle.ViewProduitLabel_designation}"/>
+                        <h:outputText value="#{produit.selectedprod.designation}" title="#{myBundle.ViewProduitTitle_designation}"/>
+
+                        <h:outputText value="#{myBundle.ViewProduitLabel_seuil}"/>
+                        <h:outputText value="#{produit.selectedprod.seuil}" title="#{myBundle.ViewProduitTitle_seuil}"/>
+
+                        <h:outputText value="#{myBundle.ViewProduitLabel_type}"/>
+                        <h:outputText value="#{produit.selectedprod.type}" title="#{myBundle.ViewProduitTitle_type}"/>
+
+                        <h:outputText value="#{myBundle.ViewProduitLabel_fournisseurId}"/>
+                        <h:outputText value="#{produit.selectedprod.fournisseur.nom}"/>
+
+                        <h:outputText value="#{myBundle.ViewProduitLabel_personnelId}"/>
+                        <h:outputText value="#{produit.selectedprod.personnel.nom}"/>    
+                    </p:panelGrid>
+                    <p:commandButton value="#{myBundle.Close}" onclick="ProduitViewDialog.hide();"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

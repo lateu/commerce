@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ApprovisionCreateDlg" widgetVar="ApprovisionCreateDialog" modal="true" resizable="false" appendToBody="true" header="{myBundle.}">
+
+            <h:form id="ApprovisionCreateForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" >
+
+                        <p:outputLabel value="{myBundle.}" for="dateFabrication" />
+                        <p:calendar id="dateFabrication" pattern="dd/MM/yyyy" value="#{approvisionbean.selectedapprovision.dateFabrication}"  showOn="button" required="true" requiredMessage="la date de fabrication est obliagtoire"/>
+
+                        <p:outputLabel value="{myBundle.}" for="dateJour" />
+                        <p:calendar id="dateJour" pattern="dd/MM/yyyy" value="#{approvisionbean.selectedapprovision.dateJour}"   showOn="button" required="true" requiredMessage="la date d'approvisionement est obliagtoire"/>
+
+                        <p:outputLabel value="{myBundle.}" for="datePeremption" />
+                        <p:calendar id="datePeremption" pattern="dd/MM/yyyy" value="#{approvisionbean.selectedapprovision.datePeremption}"   showOn="button" required="true" requiredMessage="la date de peremption est obliagtoire"/>
+
+                        <p:outputLabel value="{myBundle.}" for="quantite" />
+                        <p:inputText id="quantite" value="#{approvisionbean.selectedapprovision.quantite}"  required="true" requiredMessage=" ce chp est obligatoire"/>
+                        
+                         <h:outputLabel value="Produit" for="prod" />
+                         <p:selectOneMenu id="prod" value="#{approvisionbean.nomProd}"   >
+                             <f:selectItems value="#{approvisionbean.listeProdSelect}" /> 
+                            </p:selectOneMenu> 
+                        
+                        
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{approvisionbean.create()}" value="Save" update="display,:ApprovisionListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,ApprovisionCreateDialog);"/>
+                    <p:commandButton value="#{myBundle.Cancel}" onclick="ApprovisionCreateDialog.hide();"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

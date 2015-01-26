@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PersonnelEditDlg" widgetVar="PersonnelEditDialog" modal="true" resizable="false" appendToBody="true" header="#{myBundle.EditPersonnelTitle}">
+
+            <h:form id="PersonnelEditForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid  columns="2" rendered="#{pers.selectedpersonnel != null}">
+
+                        <p:outputLabel value="#{myBundle.EditPersonnelLabel_contact}" for="contact" />
+                        <p:inputText id="contact" value="#{pers.selectedpersonnel.contact}" title="#{myBundle.EditPersonnelTitle_contact}" />
+
+                        <p:outputLabel value="#{myBundle.EditPersonnelLabel_dateNais}" for="dateNais" />
+                        <p:calendar id="dateNais" pattern="MM/dd/yyyy" value="#{pers.selectedpersonnel.dateNais}" title="#{myBundle.EditPersonnelTitle_dateNais}"  showOn="button"/>
+
+                        <p:outputLabel value="#{myBundle.EditPersonnelLabel_etatCompte}" for="etatCompte" />
+                        <p:selectOneMenu id="etatCompte"  value="#{pers.selectedpersonnel.etatCompte}"  >
+                            <f:selectItem itemValue="#" itemLabel="choisir" /> 
+                            <f:selectItem itemValue="0" itemLabel="Blocquer" /> 
+                            <f:selectItem itemValue="1" itemLabel="Activer" />  
+                        </p:selectOneMenu> 
+                        
+                        
+                        <p:outputLabel value="#{myBundle.EditPersonnelLabel_nom}" for="nom" />
+                        <p:inputText id="nom" value="#{pers.selectedpersonnel.nom}" title="#{myBundle.EditPersonnelTitle_nom}" />
+
+                        <p:outputLabel value="#{myBundle.EditPersonnelLabel_password}" for="password" />
+                        <p:inputText id="password" value="#{pers.selectedpersonnel.password}" title="#{myBundle.EditPersonnelTitle_password}" required="true" requiredMessage="#{myBundle.EditPersonnelRequiredMessage_password}"/>
+
+                        <p:outputLabel value="#{myBundle.EditPersonnelLabel_prenom}" for="prenom" />
+                        <p:inputText id="prenom" value="#{pers.selectedpersonnel.prenom}" title="#{myBundle.EditPersonnelTitle_prenom}" />
+
+                        <p:outputLabel value="#{myBundle.EditPersonnelLabel_username}" for="username" />
+                        <p:inputText id="username" value="#{pers.selectedpersonnel.username}" title="#{myBundle.EditPersonnelTitle_username}" required="true" requiredMessage="#{myBundle.EditPersonnelRequiredMessage_username}"/>
+
+                        <p:panel visible="false">
+                            <h:outputLabel value="#{myBundle.EditPersonnelLabel_id}" for="id" />
+                            <h:inputText id="id" value="#{pers.selectedpersonnel.id}" />
+                        </p:panel>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{pers.updatePersonnel}" value="#{myBundle.Save}" update="display,:PersonnelListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,PersonnelEditDialog);"/>
+                    <p:commandButton value="#{myBundle.Cancel}" onclick="PersonnelEditDialog.hide();"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

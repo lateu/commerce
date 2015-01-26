@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PersonnelViewDlg" widgetVar="PersonnelViewDialog" modal="true" resizable="false" appendToBody="true" header="#{myBundle.ViewPersonnelTitle}">
+
+            <h:form id="PersonnelViewForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{pers.selectedpersonnel != null}">
+
+                        <h:outputText value="#{myBundle.ViewPersonnelLabel_contact}"/>
+                        <h:outputText value="#{pers.selectedpersonnel.contact}" title="#{myBundle.ViewPersonnelTitle_contact}"/>
+
+                        <h:outputText value="#{myBundle.ViewPersonnelLabel_dateNais}"/>
+                        <h:outputText value="#{pers.selectedpersonnel.dateNais}" title="#{myBundle.ViewPersonnelTitle_dateNais}">
+                            <f:convertDateTime pattern="dd/MM/yyyy" />
+                        </h:outputText>
+
+                        <h:outputText value="#{myBundle.ViewPersonnelLabel_etatCompte}"/>
+                        <h:outputText value="#{pers.selectedpersonnel.etatCompte}" title="#{myBundle.ViewPersonnelTitle_etatCompte}"/>
+
+                        <h:outputText value="#{myBundle.ViewPersonnelLabel_nom}"/>
+                        <h:outputText value="#{pers.selectedpersonnel.nom}" title="#{myBundle.ViewPersonnelTitle_nom}"/>
+
+                        <h:outputText value="#{myBundle.ViewPersonnelLabel_password}"/>
+                        <h:outputText value="#{pers.selectedpersonnel.password}" title="#{myBundle.ViewPersonnelTitle_password}"/>
+
+                        <h:outputText value="#{myBundle.ViewPersonnelLabel_prenom}"/>
+                        <h:outputText value="#{pers.selectedpersonnel.prenom}" title="#{myBundle.ViewPersonnelTitle_prenom}"/>
+
+                        <h:outputText value="#{myBundle.ViewPersonnelLabel_username}"/>
+                        <h:outputText value="#{pers.selectedpersonnel.username}" title="#{myBundle.ViewPersonnelTitle_username}"/>
+
+                    </p:panelGrid>
+                    <p:commandButton value="#{myBundle.Close}" onclick="PersonnelViewDialog.hide();"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

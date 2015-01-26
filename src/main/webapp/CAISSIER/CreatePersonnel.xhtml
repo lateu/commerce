@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PersonnelCreateDlg" widgetVar="PersonnelCreateDialog" modal="true" resizable="false" appendToBody="true" header="#{myBundle.CreatePersonnelTitle}">
+
+            <h:form id="PersonnelCreateForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{pers.selectedpersonnel != null}">
+
+                        <p:outputLabel value="#{myBundle.CreatePersonnelLabel_contact}" for="contact" />
+                        <p:inputText id="contact" value="#{pers.selectedpersonnel.contact}" title="#{myBundle.CreatePersonnelTitle_contact}" />
+
+                        <p:outputLabel value="#{myBundle.CreatePersonnelLabel_dateNais}" for="dateNais" />
+                        <p:calendar id="dateNais" pattern="dd/MM/yyyy" value="#{pers.selectedpersonnel.dateNais}" title="#{myBundle.EditPersonnelTitle_dateNais}"  showOn="button"/>
+                        <p:outputLabel value="#{myBundle.CreatePersonnelLabel_nom}" for="nom" />
+                        <p:inputText id="nom" value="#{pers.selectedpersonnel.nom}" title="#{myBundle.CreatePersonnelTitle_nom}" />
+
+                        <p:outputLabel value="{msg.password}" for="password" />
+                        <p:password id="password" value="#{pers.selectedpersonnel.password}" title="#{myBundle.CreatePersonnelTitle_password}" required="true" requiredMessage="#{myBundle.CreatePersonnelRequiredMessage_password}"/>
+
+                        <p:outputLabel value="#{myBundle.CreatePersonnelLabel_prenom}" for="prenom" />
+                        <p:inputText id="prenom" value="#{pers.selectedpersonnel.prenom}" title="#{myBundle.CreatePersonnelTitle_prenom}" />
+
+                        <p:outputLabel value="Privillége" for="autorie" />
+                        <p:selectOneMenu id="autorie" value="#{pers.autorite}"  >
+                            <f:selectItem itemValue="#" itemLabel="choisir" /> 
+                            <f:selectItem itemValue="ROLE_DG" itemLabel="DG" /> 
+                            <f:selectItem itemValue="ROLE_CAISSIER" itemLabel="CAISSIER" />  
+                        </p:selectOneMenu> 
+
+
+                        <p:outputLabel value="#{myBundle.CreatePersonnelLabel_username}" for="username" />
+                        <p:inputText id="username" value="#{pers.selectedpersonnel.username}" title="#{myBundle.CreatePersonnelTitle_username}" required="true" requiredMessage="#{myBundle.CreatePersonnelRequiredMessage_username}"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{pers.Save}" value="#{myBundle.Save}" update="display,:PersonnelListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,PersonnelCreateDialog);"/>
+                    <p:commandButton value="#{myBundle.Cancel}" onclick="PersonnelCreateDialog.hide();"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

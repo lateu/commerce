@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+    <h:form id="ApprovisionListForm">
+
+        <p:panel header="{myBundle.ListApprovisionTitle}">
+
+            <p:dataTable id="datalist" value="#{approvisionbean.listeApp}" var="item"
+                         selectionMode="single" selection="#{approvisionbean.selectedapprovision}"
+                         rowKey="#{item.id}"
+                         paginator="true"
+                         rows="10"
+                         rowsPerPageTemplate="10,20,30"
+                         >
+
+                <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
+                <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
+
+                <p:column sortBy="#{item.id}" filterBy="#{item.id}">
+                    <f:facet name="header">
+                        <h:outputText value="{myBundle.}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.id}"/>
+                </p:column>
+                <p:column sortBy="#{item.codeApprovision}" filterBy="#{item.codeApprovision}">
+                    <f:facet name="header">
+                        <h:outputText value="{myBundle.}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.codeApprovision}"/>
+                </p:column>
+                <p:column sortBy="#{item.dateFabrication}" filterBy="#{item.dateFabrication}">
+                    <f:facet name="header">
+                        <h:outputText value="{myBundle.}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.dateFabrication}">
+                        <f:convertDateTime pattern="dd/MM/yyyy" />
+                    </h:outputText>
+                </p:column>
+                <p:column sortBy="#{item.dateJour}" filterBy="#{item.dateJour}">
+                    <f:facet name="header">
+                        <h:outputText value="{myBundle.}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.dateJour}">
+                        <f:convertDateTime pattern="dd/MM/yyyy" />
+                    </h:outputText>
+                </p:column>
+                <p:column sortBy="#{item.datePeremption}" filterBy="#{item.datePeremption}">
+                    <f:facet name="header">
+                        <h:outputText value="{myBundle.}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.datePeremption}">
+                        <f:convertDateTime pattern="dd/MM/yyyy" />
+                    </h:outputText>
+                </p:column>
+                <p:column sortBy="#{item.quantite}" filterBy="#{item.quantite}">
+                    <f:facet name="header">
+                        <h:outputText value="{myBundle.}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.quantite}"/>
+                </p:column>
+                <p:column sortBy="#{item.produit.designation}" filterBy="#{item.produit.designation}">
+                    <f:facet name="header">
+                        <h:outputText value="{myBundle.}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.produit.designation}"/>
+                </p:column>
+                <f:facet name="footer">
+                    <p:commandButton id="createButton" icon="ui-icon-plus"   value="Create"   oncomplete="ApprovisionCreateDialog.show()"/>
+                    <p:commandButton id="viewButton"   icon="ui-icon-search" value="View" update=":ApprovisionViewForm" oncomplete="ApprovisionViewDialog.show()"  disabled="#{empty approvisionbean.selectedapprovision}"/>
+                    <p:commandButton id="editButton"   icon="ui-icon-pencil" value="Edit" update=":ApprovisionEditForm:display" oncomplete="ApprovisionEditDialog.show()" disabled="#{empty approvisionbean.selectedapprovision}"/>
+                    <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="Delete" update=":growl,datalist" disabled="#{empty approvisionbean.selectedapprovision}"/>
+                </f:facet>
+
+            </p:dataTable>
+
+        </p:panel>
+
+    </h:form>
+
+</ui:composition>

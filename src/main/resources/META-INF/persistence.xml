@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="1.0" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd">
+  <persistence-unit name="commercePU" transaction-type="RESOURCE_LOCAL">
+    <!--   <provider>org.hibernate.ejb.HibernatePersistence</provider>
+    <class>com.lateu.commerce.entites.Produit</class>
+    <class>com.lateu.commerce.entites.Stock</class>
+    <class>com.lateu.commerce.entites.Fournisseur</class>
+    <class>com.lateu.commerce.entites.Personnel</class>
+    <class>com.lateu.commerce.entites.Pannier</class>
+    <class>com.lateu.commerce.entites.Vente</class>
+  
+    <properties>
+      <property name="hibernate.connection.username" value="root"/>
+      <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"/>
+      <property name="hibernate.connection.password" value=""/>
+      <property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/commerce"/>
+      <property name="hibernate.cache.provider_class" value="org.hibernate.cache.NoCacheProvider"/>
+      <property name="hibernate.hbm2ddl.auto" value="create-drop"/>
+    </properties>-->
+    <class>com.lateu.commerce.entites.Approvision</class>
+    <class>com.lateu.commerce.entites.Caisse</class>
+  </persistence-unit>
+</persistence>

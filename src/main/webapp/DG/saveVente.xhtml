@@ -1,0 +1,125 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="template.xhtml">
+        <ui:define name="body" >
+            <h:form id="form">
+
+                <p:growl id="growl" showDetail="true" />
+                <p:panel style="background-color: #90b4bd ;margin-left: 30%;margin-right: 30%; margin-top: 3%">
+
+                    <p:panelGrid columns="2" >
+                        <h:outputLabel value="Code" for="code" />
+                        <p:inputText id="code" value="#{ventebean.codeProduit}" />
+
+                        <h:outputLabel value="Quantite" for="qte" />
+                        <p:inputText id="qte" value="#{ventebean.vente.quantite}"/>
+                    </p:panelGrid>
+                    <p:commandButton   actionListener="#{ventebean.Save}" update=":form11:cars,form:growl,:form12" icon="ui-icon-check" ajax="true"  value="Save"  />
+
+
+                </p:panel>
+
+            </h:form>
+
+            <div id="top">
+
+
+                <h:form id="form11" prependId="false">  
+
+                    <p:growl id="growl2" showDetail="true" /> 
+
+                    <p:dataTable id="cars" var="fr" value="#{ventebean.panniers}"  widgetVar="carsTable" emptyMessage="" style=" width: 40%; margin-left: 30%"
+                                 paginator="true" rows="5"  
+                                 selection="#{ventebean.pannier}"
+                                 rowKey="#{fr.id}"
+                                 rowsPerPageTemplate="5,10,15"
+                                 selectionMode="single"
+                                 >  
+
+                        <p:column id="nom" filterBy="#{fr.designation}"   
+                                  headerText="Designation"
+                                  filterMatchMode="contains" style=" width: 60%">  
+                            <h:outputText value="#{fr.designation}" />  
+
+                        </p:column> 
+
+                        <p:column id="iden" filterBy="#{fr.PU}"   
+                                  headerText="PU"
+                                  filterMatchMode="contains">  
+                            <h:outputText value="#{fr.PU}" />  
+                        </p:column> 
+
+
+
+                        <p:column id="ville" filterBy="#{fr.quantite}"   
+                                  headerText="Quantite" 
+                                  filterMatchMode="contains">  
+                            <h:outputText value="#{fr.quantite}" />  
+                        </p:column> 
+
+
+
+
+                        <p:column id="PT" filterBy="#{fr.PT}"   
+                                  headerText="PT" 
+                                  filterMatchMode="contains">  
+                            <h:outputText value="#{fr.PT}" />  
+                        </p:column> 
+
+
+                    </p:dataTable>  
+
+
+                    <p:panel style=" width: 2%; margin-left: 60%" >  
+                        <table  align="right" bgcolor="#036fab" width="100%">
+                            <tr>
+
+                                <td width="10%">     <p:commandButton value="Nouveau" actionListener="#{ventebean.vider()}" id="withIcon0"   icon="ui-icon-disk" update=":form11:cars,:form12"/> </td> 
+                                <td width="10%">     <p:commandButton value="SaveVente" actionListener="#{ventebean.enregistrerPannier}" update="form11:growl2" icon="ui-icon-check"   /> </td> 
+
+                                <td width="10%"> 
+                                    <p:commandButton id="editButton" action="#{ventebean.diminuerPannier()}"  onclick="submit();"  icon="ui-icon-pencil" value="Supprimer"/>
+                                </td> 
+                            
+                              <td width="10%">   <h:commandButton value="imprimer" actionListener="#{pannier.pdf()}" id="withIcon1"  />  </td> 
+
+      
+                            </tr>
+                        </table>
+                    </p:panel>  
+
+
+                </h:form>  
+
+
+            </div>
+
+            <div id="top2">
+
+
+                <h:form id="form12">  
+                    <p:panel style="width: 20%; margin-left: 75%;background: #036fab" id="blocMt">
+                        <p:panelGrid columns="2" >
+
+                            <h:outputLabel value="montant total de la facture" />
+                            <h:outputLabel id="mt" value="#{ventebean.montant}"/>
+                        </p:panelGrid>
+
+                    </p:panel>
+                </h:form> 
+            </div>
+
+
+
+
+        </ui:define>
+    </ui:composition>
+
+</html>
+

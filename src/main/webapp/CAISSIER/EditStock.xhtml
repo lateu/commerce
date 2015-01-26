@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="StockEditDlg" widgetVar="StockEditDialog" modal="true" resizable="false" appendToBody="true" header="#{myBundle.EditStockTitle}">
+
+            <h:form id="StockEditForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid  columns="2" rendered="#{stock.stockselected != null}">
+
+
+                        <p:outputLabel value="#{myBundle.EditStockLabel_quantiteEnStock}" for="quantiteEnStock" />
+                        <p:inputText id="quantiteEnStock" value="#{stock.stockselected.quantiteEnStock}" title="#{myBundle.EditStockTitle_quantiteEnStock}" required="true" requiredMessage="#{myBundle.EditStockRequiredMessage_quantiteEnStock}"/>
+                        <p:panel visible="false">
+                            <p:outputLabel value="Id" for="iden" />
+                            <p:inputText id="iden" value="#{stock.stockselected.id}" />
+                            
+                            <p:outputLabel value="Id" for="code" />
+                            <p:inputText id="code" value="#{stock.stockselected.codeProduit}" />
+                            
+                        </p:panel>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{stock.updateStock}" value="#{myBundle.Save}" update="display,:StockListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,StockEditDialog);"/>
+                    <p:commandButton value="#{myBundle.Cancel}" onclick="StockEditDialog.hide();"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

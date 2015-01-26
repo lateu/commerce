@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ProduitEditDlg" widgetVar="ProduitEditDialog" modal="true" resizable="false" appendToBody="true" header="#{myBundle.EditProduitTitle}">
+
+            <h:form id="ProduitEditForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid  columns="2" rendered="#{produit.selectedprod != null}">
+
+                        <p:outputLabel value="#{myBundle.EditProduitLabel_pu}" for="pu" />
+                        <p:inputText id="pu" value="#{produit.selectedprod.PU}" title="#{myBundle.EditProduitTitle_pu}" required="true" requiredMessage="#{myBundle.EditProduitRequiredMessage_pu}"/>
+
+                        <p:outputLabel value="#{myBundle.EditProduitLabel_code}" for="code" />
+                        <p:inputText id="code" value="#{produit.selectedprod.code}" title="#{myBundle.EditProduitTitle_code}" />
+
+                        <p:outputLabel value="#{myBundle.EditProduitLabel_designation}" for="designation" />
+                        <p:inputText id="designation" value="#{produit.selectedprod.designation}" title="#{myBundle.EditProduitTitle_designation}" />
+
+                        <p:outputLabel value="#{myBundle.EditProduitLabel_seuil}" for="seuil" />
+                        <p:inputText id="seuil" value="#{produit.selectedprod.seuil}" title="#{myBundle.EditProduitTitle_seuil}" required="true" requiredMessage="#{myBundle.EditProduitRequiredMessage_seuil}"/>
+
+                        <h:outputLabel value="#{myBundle.CreateProduitLabel_type}" for="type" />
+                        <p:selectOneMenu id="type" value="#{produit.selectedprod.type}"  >
+                            <f:selectItem itemValue="#" itemLabel="choisir" /> 
+                            <f:selectItem itemValue="alimentaire" itemLabel="Alimentaire" /> 
+                            <f:selectItem itemValue="electromenager" itemLabel="Electromenager" />  
+                        </p:selectOneMenu> 
+
+                        <h:outputLabel value="Fournisseur" for="fourn" />
+                        <p:selectOneMenu id="fourn" value="#{produit.nomFourn}"   >
+                            <f:selectItems value="#{produit.listefournSelect}" /> 
+                        </p:selectOneMenu> 
+
+
+                        <p:outputLabel value="#{myBundle.CreateProduitLabel_personnelId}" for="personnelId" />
+                        <p:inputText id="personnelId" value="#{produit.nomPers}"  />
+
+
+                        <p:panel visible="false">
+                            <h:outputLabel value="#{myBundle.EditProduitLabel_id}" for="id" />
+                            <h:inputText id="id" value="#{produit.selectedprod.id}" />
+                        </p:panel>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{produit.UpdateProduit}" value="#{myBundle.Save}" update="display,:ProduitListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,ProduitEditDialog);"/>
+                    <p:commandButton value="#{myBundle.Cancel}" onclick="ProduitEditDialog.hide();"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

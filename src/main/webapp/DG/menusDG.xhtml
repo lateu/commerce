@@ -1,0 +1,96 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <f:view locale="#{changeLocale.locale}">
+        <ui:composition>
+            <table  align="right" bgcolor="#036fab" width="100%">
+                <tr>
+                    <td width="10%"> <img src="../images/logocom.JPG"  width="80" height="80" alt="logo" /></td> 
+
+                    <td width="75%">
+                        <h:form id="menuForm">
+                            <p:menubar style="height: 10%; margin-left: 5%;margin-right: 5%; border-radius: 20px;background-color: darkgrey">  
+
+
+                                <p:submenu   label="Produit" >  
+
+                                    <p:menuitem   value="Nouveau" styleClass="#{produit.produitWarning()}"   url="/vues/DG/indexProduit.xhtml" /> 
+
+                                </p:submenu>
+
+
+                                <p:submenu   label="Fournisseur" >  
+
+                                    <p:menuitem value="Nouveau" url="/DG/indexFournisseur.xhtml" /> 
+
+                                </p:submenu>
+
+
+                                <p:submenu   label="Personnel" >  
+
+                                    <p:menuitem value="Nouveau" url="/DG/indexPersonnel.xhtml" /> 
+
+                                </p:submenu>
+
+
+
+                                <p:submenu   label="Recette" >  
+
+                                    <p:menuitem value="recette-J" url="/DG/recettejournaliere.xhtml" /> 
+                                    <p:menuitem value="recette-P" url="/DG/recetteperiodique.xhtml" />
+                                </p:submenu>
+
+
+
+                                <p:submenu   label="pannier" >  
+                                    <p:menuitem value="pannier" url="/DG/saveVente.xhtml" />  
+                                </p:submenu>
+                                
+                               
+                                <p:submenu   label="Approvision" style="font-weight: bold">  
+                                    <p:menuitem value="Nouveau" url="/DG/indexApprovision.xhtml" /> 
+
+                                </p:submenu>
+
+                                <p:submenu   label="comptabilite" >  
+                                    <p:menuitem value="vente" url="Listvente.xhtml" /> 
+                                    <p:menuitem value="stock" url="/DG/indexStock.xhtml" /> 
+
+                                </p:submenu>
+
+                                <p:submenu   label="options" style="margin-left: 15%">  
+
+                                    <p:menuitem  value="#{myBundle['welcome.depart']}" url="/j_spring_security_logout" style=" font-size: 20px;" />
+                                    <p:menuitem  value="Personnalise" url="#"  />
+                                    <p:menuitem  value="Affecter-caissier" url="#"  />
+                                </p:submenu>
+
+                            </p:menubar>  
+
+                        </h:form>
+                    </td>
+                    <td width="15%" height="90">
+                        <h:form id="formulaire">
+                            <h:panelGrid columns="3" style="height: 30px; margin-left: 30%;  font-size: 15px;" >
+                                <h:commandButton value="#{myBundle['welcome.langue1']}" image="/images/fr.png" action="#{changeLocale.setFrenchLocale}" style="color: black;font-size: 15px"/>
+                                <h:commandButton value="#{myBundle['welcome.langue2']}" image="/images/en.png" action="#{changeLocale.setEnglishLocale}" style="color: black;font-size: 15px"/>
+
+                            </h:panelGrid>
+                            <h:outputLabel    value="#{myBundle.connecte}  #{loginController.conncte} "    style="margin-left: 25%;margin-right: 5%;font-weight: bold; color: black"/> 
+                        </h:form>
+                    </td>
+                </tr>
+
+
+            </table>
+        </ui:composition>
+
+    </f:view>
+
+</html>
+

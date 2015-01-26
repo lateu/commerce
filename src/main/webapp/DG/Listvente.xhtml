@@ -1,0 +1,71 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+ 
+     <ui:composition template="template.xhtml">
+            <ui:define name="body" >
+
+
+    
+    <h:form id="VenteListForm">
+        <p:panel style="background-color: #90b4bd ;margin-left: 20%;margin-right: 25%">
+            <p:dataTable id="datalist" value="#{ventebean.listevente}" var="item"
+                         selectionMode="single" selection="#{ventebean.vente}"
+                         rowKey="#{item.id}"
+                         paginator="true"
+                         rows="10"
+                         rowsPerPageTemplate="10,20,30"
+                         >
+<!--
+                <p:column sortBy="#{item.id}" filterBy="#{item.id}">
+                    <f:facet name="header">
+                        <h:outputText value="#{myBundle.ListVenteTitle_id}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.id}"/>
+                </p:column>-->
+                <p:column sortBy="#{item.produit.designation}" filterBy="#{item.produit.designation}">
+                    <f:facet name="header">
+                        <h:outputText value="#{myBundle.ListVenteTitle_produitId}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.produit.designation}"/>
+                </p:column>
+                
+                <p:column sortBy="#{item.produit.type}" filterBy="#{item.produit.type}">
+                    <f:facet name="header">
+                        <h:outputText value="type"/>
+                    </f:facet>
+                    <h:outputText value="#{item.produit.type}"/>
+                </p:column>
+                
+                 <p:column sortBy="#{item.quantite}" filterBy="#{item.quantite}">
+                    <f:facet name="header">
+                        <h:outputText value="#{myBundle.ListVenteTitle_quantite}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.quantite}"/>
+                </p:column>
+                
+                
+                <p:column sortBy="#{item.dateRecette}" filterBy="#{item.dateRecette}">
+                    <f:facet name="header">
+                        <h:outputText value="#{myBundle.ListVenteTitle_dateRecette}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.dateRecette}">
+                        <f:convertDateTime pattern="dd/MM/yyyy" />
+                    </h:outputText>
+                </p:column>
+               
+
+            </p:dataTable>
+    </p:panel>
+                </h:form>  
+            </ui:define>
+
+
+        </ui:composition>
+  
+</html>
+

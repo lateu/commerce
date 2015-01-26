@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+  
+        <ui:composition template="template.xhtml">
+            <ui:define name="body" >
+                <h:form id="form">
+
+                    <p:panel style="width: 500px;margin-left: 30%;margin-right: 10%;">
+
+                        <p:panelGrid columns="2" style="background: #dddddd; ">
+                            <h:outputLabel value="Debut" />
+                            <p:calendar value="#{ventebean.d1}"  mode="popup" showOn="button" />
+                            <h:outputLabel value="fin" />
+                            <p:calendar value="#{ventebean.d2}"  mode="popup" showOn="button" />
+                        </p:panelGrid>
+                        <p:commandButton  action="#{ventebean.recettep()}" icon="ui-icon-check" ajax="false"  value="Save"  />
+
+                    </p:panel>
+                    <br />
+                    <p:panel style="width: 25%; margin-left: 30%;background: #036fab">
+                        <p:panelGrid columns="2" >
+
+                            <h:outputLabel value="recette de cette periode" />
+                            <h:outputLabel id="mt" value="#{ventebean.recetteperiodique}"/>
+                        </p:panelGrid>
+
+                    </p:panel>
+                </h:form>
+            </ui:define>
+        </ui:composition>
+
+</html>
+

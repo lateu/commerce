@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="FournisseurViewDlg" widgetVar="FournisseurViewDialog" modal="true" resizable="false" appendToBody="true" header="#{myBundle.ViewFournisseurTitle}">
+
+            <h:form id="FournisseurViewForm">
+
+                <h:panelGroup id="display">
+                   <p:panelGrid columns="2" rendered="#{fourn.selectedfour != null}">
+
+
+                        <h:outputText value="#{myBundle.ViewFournisseurLabel_contact}"/>
+                        <h:outputText value="#{fourn.selectedfour.contact}" title="#{myBundle.ViewFournisseurTitle_contact}"/>
+
+                        <h:outputText value="#{myBundle.ViewFournisseurLabel_nom}"/>
+                        <h:outputText value="#{fourn.selectedfour.nom}" title="#{myBundle.ViewFournisseurTitle_nom}"/>
+
+                        <h:outputText value="#{myBundle.ViewFournisseurLabel_ville}"/>
+                        <h:outputText value="#{fourn.selectedfour.ville}" title="#{myBundle.ViewFournisseurTitle_ville}"/>
+
+                      <!--
+                        <h:outputText value="#{myBundle.ViewFournisseurLabel_id}"/>
+                        <h:outputText value="#{fourn.selectedfour.id}" title="#{myBundle.ViewFournisseurTitle_id}"/>-->
+                    </p:panelGrid>
+                    <p:commandButton value="#{myBundle.Close}" onclick="FournisseurViewDialog.hide();"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

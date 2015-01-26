@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ApprovisionEditDlg" widgetVar="ApprovisionEditDialog" modal="true" resizable="false" appendToBody="true" header="{myBundle.EditApprovisionTitle}">
+
+            <h:form id="ApprovisionEditForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid  columns="2" rendered="#{approvisionbean.selectedapprovision != null}">
+
+                        <h:outputLabel value="{myBundle.}" for="id" />
+                        <h:outputText id="id" value="#{approvisionbean.selectedapprovision.id}" />
+
+                        <p:outputLabel value="{code.}" for="codeApprovision" />
+                        <p:inputText id="codeApprovision" value="#{approvisionbean.selectedapprovision.codeApprovision}"  />
+
+                        <p:outputLabel value="{myBundle}" for="dateFabrication" />
+                        <p:calendar id="dateFabrication" pattern="MM/dd/yyyy" value="#{approvisionbean.selectedapprovision.dateFabrication}"   showOn="button"/>
+
+                        <p:outputLabel value="{myBundle.}" for="dateJour" />
+                        <p:calendar id="dateJour" pattern="MM/dd/yyyy" value="#{approvisionbean.selectedapprovision.dateJour}"   showOn="button"/>
+
+                        <p:outputLabel value="{myBundle.}" for="datePeremption" />
+                        <p:calendar id="datePeremption" pattern="MM/dd/yyyy" value="#{approvisionbean.selectedapprovision.datePeremption}"   showOn="button"/>
+
+                        <p:outputLabel value="{myBundle.}" for="quantite" />
+                        <p:inputText id="quantite" value="#{approvisionbean.selectedapprovision.quantite}" required="true" requiredMessage="{myBundle.EditApprovisionRequiredMessage_quantite}"/>
+
+                    </p:panelGrid>
+                    <p:commandButton actionListener="{approvision.save}" value="Save" update="display,:ApprovisionListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,ApprovisionEditDialog);"/>
+                    <p:commandButton value="Cancel" onclick="ApprovisionEditDialog.hide();"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

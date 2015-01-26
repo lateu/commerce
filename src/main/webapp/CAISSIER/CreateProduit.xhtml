@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ProduitCreateDlg" widgetVar="ProduitCreateDialog" modal="true" resizable="false" appendToBody="true" header="#{myBundle.CreateProduitTitle}">
+
+            <h:form id="ProduitCreateForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{produit.selectedprod!= null}">
+
+                        <p:outputLabel value="#{myBundle.CreateProduitLabel_pu}" for="pu" />
+                        <p:inputText id="pu" value="#{produit.selectedprod.PU}" title="#{myBundle.CreateProduitTitle_pu}" required="true" requiredMessage="#{myBundle.CreateProduitRequiredMessage_pu}"/>
+
+                        <p:outputLabel value="#{myBundle.CreateProduitLabel_code}" for="code" />
+                        <p:inputText id="code" value="#{produit.selectedprod.code}" title="#{myBundle.CreateProduitTitle_code}" />
+                      <p:outputLabel value="{myBundle.quantite" for="qte" />
+                      <p:inputText id="qte" value="#{produit.selectedapprov.quantite}" title="#{myBundle.CreateProduitTitle_code}" />
+                      
+                          <p:outputLabel value="{myBundle.dateJour" for="dateJour" />
+                          <p:calendar id="dateJour" pattern="dd/MM/yyyy" value="#{produit.selectedapprov.dateJour}" title="#{myBundle.EditProduitTitle_dateFabrication}"  showOn="button"/>
+
+                        
+                        <p:outputLabel value="#{myBundle.CreateProduitLabel_dateFabrication}" for="dateFabrication" />
+                        <p:calendar id="dateFabrication" pattern="dd/MM/yyyy" value="#{produit.selectedapprov.dateFabrication}" title="#{myBundle.EditProduitTitle_dateFabrication}"  showOn="button"/>
+
+                        <p:outputLabel value="#{myBundle.CreateProduitLabel_datePeremption}" for="datePeremption" />
+                        <p:calendar id="datePeremption" pattern="dd/MM/yyyy" value="#{produit.selectedapprov.datePeremption}" title="#{myBundle.EditProduitTitle_datePeremption}"  showOn="button"/>
+
+                        <p:outputLabel value="#{myBundle.CreateProduitLabel_designation}" for="designation" />
+                        <p:inputText id="designation" value="#{produit.selectedprod.designation}" title="#{myBundle.CreateProduitTitle_designation}" />
+
+                        <p:outputLabel value="#{myBundle.CreateProduitLabel_seuil}" for="seuil" />
+                        <p:inputText id="seuil" value="#{produit.selectedprod.seuil}" title="#{myBundle.CreateProduitTitle_seuil}" required="true" requiredMessage="#{myBundle.CreateProduitRequiredMessage_seuil}"/>
+
+                        <h:outputLabel value="#{myBundle.CreateProduitLabel_type}" for="type" />
+                        <p:selectOneMenu id="type" value="#{produit.selectedprod.type}"  >
+                            <f:selectItem itemValue="#" itemLabel="choisir" /> 
+                            <f:selectItem itemValue="alimentaire" itemLabel="Alimentaire" /> 
+                            <f:selectItem itemValue="electromenager" itemLabel="Electromenager" />  
+                        </p:selectOneMenu> 
+                        
+                   <p:outputLabel value="#{myBundle.CreateProduitLabel_personnelId}" for="personnelId" />
+                        <p:inputText id="personnelId" value="#{produit.nomPers}" required="true" requiredMessage="#{myBundle.EditProduitRequiredMessage_personnelId}" />
+
+                        <h:outputLabel value="Fournisseur" for="fourn" />
+                        <p:selectOneMenu id="fourn" value="#{produit.nomFourn}"   >
+                            <f:selectItems value="#{produit.listefournSelect}" /> 
+                        </p:selectOneMenu> 
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{produit.saveProduit}" value="#{myBundle.Save}" update="display,:ProduitListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,ProduitCreateDialog);"/>
+                    <p:commandButton value="#{myBundle.Cancel}" onclick="ProduitCreateDialog.hide();"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="VenteViewDlg" widgetVar="VenteViewDialog" modal="true" resizable="false" appendToBody="true" header="#{myBundle.ViewVenteTitle}">
+
+            <h:form id="VenteViewForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{venteController.selected != null}">
+
+                        <h:outputText value="#{myBundle.ViewVenteLabel_id}"/>
+                        <h:outputText value="#{venteController.selected.id}" title="#{myBundle.ViewVenteTitle_id}"/>
+
+                        <h:outputText value="#{myBundle.ViewVenteLabel_dateRecette}"/>
+                        <h:outputText value="#{venteController.selected.dateRecette}" title="#{myBundle.ViewVenteTitle_dateRecette}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+
+                        <h:outputText value="#{myBundle.ViewVenteLabel_quantite}"/>
+                        <h:outputText value="#{venteController.selected.quantite}" title="#{myBundle.ViewVenteTitle_quantite}"/>
+
+                        <h:outputText value="#{myBundle.ViewVenteLabel_produitId}"/>
+                        <h:outputText value="#{venteController.selected.produitId.id}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{myBundle.Close}" onclick="VenteViewDialog.hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

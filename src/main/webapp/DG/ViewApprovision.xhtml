@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ApprovisionViewDlg" widgetVar="ApprovisionViewDialog" modal="true" resizable="false" appendToBody="true" header="{myBundle.ViewApprovisionTitle}">
+
+            <h:form id="ApprovisionViewForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{approvisionbean.selectedapprovision != null}">
+
+                        <h:outputText value="{myBundle.}"/>
+                        <h:outputText value="#{approvisionbean.selectedapprovision.id}" />
+
+                        <h:outputText value="{myBundle.}"/>
+                        <h:outputText value="#{approvisionbean.selectedapprovision.codeApprovision}"/>
+
+                        <h:outputText value="{myBundle.}"/>
+                        <h:outputText value="#{approvisionbean.selectedapprovision.dateFabrication}" >
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+
+                        <h:outputText value="{myBundle.}"/>
+                        <h:outputText value="#{approvisionbean.selectedapprovision.dateJour}" >
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+
+                        <h:outputText value="{myBundle.}"/>
+                        <h:outputText value="#{approvisionbean.selectedapprovision.datePeremption}" >
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+
+                        <h:outputText value="{myBundle.}"/>
+                        <h:outputText value="#{approvisionbean.selectedapprovision.quantite}" />
+
+                        <h:outputText value="{myBundle.}"/>
+                        <h:outputText value="#{approvisionbean.selectedapprovision.produit.designation}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="{Close}" onclick="ApprovisionViewDialog.hide();"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

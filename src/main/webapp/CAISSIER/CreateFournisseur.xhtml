@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="FournisseurCreateDlg" widgetVar="FournisseurCreateDialog" modal="true" resizable="false" appendToBody="true" header="#{myBundle.CreateFournisseurTitle}">
+
+            <h:form id="FournisseurCreateForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{fourn.selectedfour != null}">
+
+                        <p:outputLabel value="#{myBundle.CreateFournisseurLabel_contact}" for="contact" />
+                        <p:inputText id="contact" value="#{fourn.selectedfour.contact}" title="#{myBundle.CreateFournisseurTitle_contact}" />
+
+                        <p:outputLabel value="#{myBundle.nom}" for="nom" />
+                        <p:inputText id="nom" value="#{fourn.selectedfour.nom}" title="#{myBundle.CreateFournisseurTitle_nom}" />
+
+                        <p:outputLabel value="#{myBundle.ville}" for="ville" />
+                        <p:inputText id="ville" value="#{fourn.selectedfour.ville}" title="#{myBundle.CreateFournisseurTitle_ville}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{fourn.Save}" value="#{myBundle.Save}" update="display,:FournisseurListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,FournisseurCreateDialog);"/>
+                    <p:commandButton value="#{myBundle.Cancel}" onclick="FournisseurCreateDialog.hide();"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

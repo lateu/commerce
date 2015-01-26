@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PannierCreateDlg" widgetVar="PannierCreateDialog" modal="true" resizable="false" appendToBody="true" header="#{myBundle.CreatePannierTitle}">
+
+            <h:form id="PannierCreateForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{pannierController.selected != null}">
+
+                        <p:outputLabel value="#{myBundle.CreatePannierLabel_pt}" for="pt" />
+                        <p:inputText id="pt" value="#{pannierController.selected.pt}" title="#{myBundle.CreatePannierTitle_pt}" required="true" requiredMessage="#{myBundle.CreatePannierRequiredMessage_pt}"/>
+
+                        <p:outputLabel value="#{myBundle.CreatePannierLabel_pu}" for="pu" />
+                        <p:inputText id="pu" value="#{pannierController.selected.pu}" title="#{myBundle.CreatePannierTitle_pu}" required="true" requiredMessage="#{myBundle.CreatePannierRequiredMessage_pu}"/>
+
+                        <p:outputLabel value="#{myBundle.CreatePannierLabel_designation}" for="designation" />
+                        <p:inputText id="designation" value="#{pannierController.selected.designation}" title="#{myBundle.CreatePannierTitle_designation}" />
+
+                        <p:outputLabel value="#{myBundle.CreatePannierLabel_quantite}" for="quantite" />
+                        <p:inputText id="quantite" value="#{pannierController.selected.quantite}" title="#{myBundle.CreatePannierTitle_quantite}" required="true" requiredMessage="#{myBundle.CreatePannierRequiredMessage_quantite}"/>
+
+                        <p:outputLabel value="#{myBundle.CreatePannierLabel_produitId}" for="produitId" />
+                        <p:selectOneMenu id="produitId" value="#{pannierController.selected.produitId}" required="true" requiredMessage="#{myBundle.EditPannierRequiredMessage_produitId}">
+                            <f:selectItem itemLabel="#{myBundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{produitController.items}"
+                                           var="produitIdItem"
+                                           itemValue="#{produitIdItem}"
+                                           itemLabel="#{produitIdItem.id.toString()}"
+                                           />
+                            <f:converter binding="#{produitConverter}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{pannierController.saveNew}" value="#{myBundle.Save}" update="display,:PannierListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,PannierCreateDialog);"/>
+                    <p:commandButton value="#{myBundle.Cancel}" onclick="PannierCreateDialog.hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

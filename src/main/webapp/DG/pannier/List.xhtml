@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+    <h:form id="PannierListForm">
+
+        <p:panel header="#{myBundle.ListPannierTitle}">
+
+            <p:dataTable id="datalist" value="#{pannierController.items}" var="item"
+                         selectionMode="single" selection="#{pannierController.selected}"
+                         rowKey="#{item.id}"
+                         paginator="true"
+                         rows="10"
+                         rowsPerPageTemplate="10,20,30"
+                         >
+
+                <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
+                <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
+
+                <p:column sortBy="#{item.id}" filterBy="#{item.id}">
+                    <f:facet name="header">
+                        <h:outputText value="#{myBundle.ListPannierTitle_id}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.id}"/>
+                </p:column>
+                <p:column sortBy="#{item.pt}" filterBy="#{item.pt}">
+                    <f:facet name="header">
+                        <h:outputText value="#{myBundle.ListPannierTitle_pt}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.pt}"/>
+                </p:column>
+                <p:column sortBy="#{item.pu}" filterBy="#{item.pu}">
+                    <f:facet name="header">
+                        <h:outputText value="#{myBundle.ListPannierTitle_pu}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.pu}"/>
+                </p:column>
+                <p:column sortBy="#{item.designation}" filterBy="#{item.designation}">
+                    <f:facet name="header">
+                        <h:outputText value="#{myBundle.ListPannierTitle_designation}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.designation}"/>
+                </p:column>
+                <p:column sortBy="#{item.quantite}" filterBy="#{item.quantite}">
+                    <f:facet name="header">
+                        <h:outputText value="#{myBundle.ListPannierTitle_quantite}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.quantite}"/>
+                </p:column>
+                <p:column sortBy="#{item.produitId.id}" filterBy="#{item.produitId.id}">
+                    <f:facet name="header">
+                        <h:outputText value="#{myBundle.ListPannierTitle_produitId}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.produitId.id}"/>
+                </p:column>
+                <f:facet name="footer">
+                    <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{myBundle.Create}" actionListener="#{pannierController.prepareCreate}" update=":PannierCreateForm" oncomplete="PannierCreateDialog.show()"/>
+                    <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{myBundle.View}" update=":PannierViewForm" oncomplete="PannierViewDialog.show()" disabled="#{empty pannierController.selected}"/>
+                    <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{myBundle.Edit}" update=":PannierEditForm" oncomplete="PannierEditDialog.show()" disabled="#{empty pannierController.selected}"/>
+                    <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{myBundle.Delete}" actionListener="#{pannierController.delete}" update=":growl,datalist" disabled="#{empty pannierController.selected}"/>
+                </f:facet>
+
+            </p:dataTable>
+
+        </p:panel>
+
+    </h:form>
+
+</ui:composition>

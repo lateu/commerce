@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.0.xsd" 
+       xmlns:context="http://www.springframework.org/schema/context" >
+    
+    <!-- couches applicatives -->
+   
+    <bean id="Fourisseurdao" class="com.lateu.commerce.dao.Impl.FournisseurdaoImpl"/>
+    <bean id="Personneldao" class="com.lateu.commerce.dao.Impl.PersonneldaoImpl"/>
+    <bean id="Produitdao" class="com.lateu.commerce.dao.Impl.ProduitdaoImpl"/>
+    <bean id="Stockdao" class="com.lateu.commerce.dao.Impl.StockdaoImpl"/>
+    <bean id="Ventedao" class="com.lateu.commerce.dao.Impl.VentedaoImpl"/>
+    <bean id="Pannierdao" class="com.lateu.commerce.dao.Impl.PannierdaoImpl"/>
+    <bean id="Approvisiondao" class="com.lateu.commerce.dao.Impl.ApprovisiondaoImpl"/>
+    <bean id="UserRoledao" class="com.lateu.commerce.dao.Impl.UserRoledaoImpl"/>
+
+
+  
+    <bean id="sProduit" class="com.lateu.commerce.metier.Impl.sProduitImpl">
+        <property name="produitdao" ref="Produitdao"/>
+        <property name="personneldao" ref="Personneldao"/>
+        <property name="stockdao" ref="Stockdao"/>
+        <property name="fournisseurdao" ref="Fourisseurdao"/>
+       
+    </bean>
+  
+    <bean id="sStock" class="com.lateu.commerce.metier.Impl.sStockImpl">
+        <property name="produitdao" ref="Produitdao"/>
+        <property name="stockdao" ref="Stockdao"/>
+    </bean>
+  
+    <bean id="sPannier" class="com.lateu.commerce.metier.Impl.sPannierImpl">
+        <property name="pannierdao" ref="Pannierdao"/>
+         <property name="stockdao" ref="Stockdao"/>
+    </bean>
+
+
+    <bean id="sFournisseur" class="com.lateu.commerce.metier.Impl.sFournisseurImpl">
+        <property name="fournisseurdao" ref="Fourisseurdao"/>
+    </bean>
+
+   
+  
+    <bean id="sVente" class="com.lateu.commerce.metier.Impl.sVenteImpl">
+        <property name="ventedao" ref="Ventedao"/>
+        <property name="produitdao" ref="Produitdao"/>
+        <property name="stockdao" ref="Stockdao"/>
+        <property name="pannierdao" ref="Pannierdao"/>
+    </bean>
+
+    <bean id="sPersonnel" class="com.lateu.commerce.metier.Impl.sPersonnelImpl">
+        <property name="personneldao" ref="Personneldao"/>
+        <property name="roledao" ref="UserRoledao"/>
+    </bean>
+
+    <bean id="sRole" class="com.lateu.commerce.metier.Impl.sRoleImpl">
+        <property name="personneldao" ref="Personneldao"/>
+        <property name="roledao" ref="UserRoledao"/>
+    </bean>
+
+    <bean id="sApprovision" class="com.lateu.commerce.metier.Impl.sApprovisionImpl">
+        <property name="produitdao" ref="Produitdao"/>
+        <property name="approvisiondao" ref="Approvisiondao"/>
+    </bean>
+
+          
+    <!-- la source de donnéees DBCP -->
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close"> 
+        <property name="username" value="root"/>
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+        <property name="password" value=""/>
+        <property name="url" value="jdbc:mysql://localhost:3306/commerce"/>
+      
+    
+    </bean>
+    
+    <!-- couche de persistance JPA -->
+    <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+        <property name="dataSource" ref="dataSource" />
+        <property name="jpaVendorAdapter">
+        
+            <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+                
+                <property name="showSql" value="true" />  
+              
+                <property name="databasePlatform" value="org.hibernate.dialect.MySQL5InnoDBDialect" />
+                <property name="generateDdl" value="true" />
+            </bean>
+        </property>
+
+        <property name="loadTimeWeaver">
+            <bean class="org.springframework.instrument.classloading.InstrumentationLoadTimeWeaver" />
+
+        </property>
+    </bean>
+    <!-- le gestionnaire de transactions -->
+    <tx:annotation-driven transaction-manager="txManager" />
+    <bean id="txManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+        <property name="entityManagerFactory" ref="entityManagerFactory" />
+    </bean>
+    <!-- traduction des exceptions -->
+    <bean class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />
+    <!-- annotations de persistance -->
+    <bean class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor" />
+    
+</beans>

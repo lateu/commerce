@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+    <h:form id="StockListForm">
+
+        <p:panel header="#{myBundle.ListStockTitle}" style="margin-left: 25%;margin-right: 25%">
+
+            <p:dataTable id="datalist" value="#{stock.stocks}" var="item"
+                         selectionMode="single" selection="#{stock.stockselected}"
+                         rowKey="#{item.id}"
+                         paginator="true"
+                         rows="10"
+                         rowsPerPageTemplate="10,20,30"
+                         >
+
+                <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
+                <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
+
+              
+                <p:column sortBy="#{item.produit.designation}" filterBy="#{item.produit.designation}">
+                    <f:facet name="header">
+                        <h:outputText value="#{myBundle.ListStockTitle_produitId}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.produit.designation}"/>
+                </p:column>
+                
+               
+                <p:column sortBy="#{item.quantiteEnStock}" filterBy="#{item.quantiteEnStock}">
+                    <f:facet name="header">
+                        <h:outputText value="#{myBundle.ListStockTitle_quantiteEnStock}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.quantiteEnStock}"/>
+                </p:column>
+                
+                <p:panel visible="false">
+                     <p:column sortBy="#{item.codeProduit}" filterBy="#{item.codeProduit}">
+                    <f:facet name="header">
+                        <h:outputText value="#{myBundle.ListStockTitle_codeProduit}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.codeProduit}"/>
+                </p:column>
+                    
+                </p:panel>
+                
+                <f:facet name="footer">
+                    <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{myBundle.Create}"  update=":StockCreateForm:display" oncomplete="StockCreateDialog.show()" disabled="true"/>
+                    <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{myBundle.View}" update=":StockViewForm" oncomplete="StockViewDialog.show()" disabled="#{empty stock.stockselected}"/>
+                    <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{myBundle.Edit}" update=":StockEditForm:display" oncomplete="StockEditDialog.show()" disabled="true"/>
+                    <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{myBundle.Delete}" actionListener="{stockController.delete}" update=":growl,datalist" disabled="true"/>
+                </f:facet>
+
+            </p:dataTable>
+
+        </p:panel>
+
+    </h:form>
+
+</ui:composition>

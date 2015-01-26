@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PannierViewDlg" widgetVar="PannierViewDialog" modal="true" resizable="false" appendToBody="true" header="#{myBundle.ViewPannierTitle}">
+
+            <h:form id="PannierViewForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{pannierController.selected != null}">
+
+                        <h:outputText value="#{myBundle.ViewPannierLabel_id}"/>
+                        <h:outputText value="#{pannierController.selected.id}" title="#{myBundle.ViewPannierTitle_id}"/>
+
+                        <h:outputText value="#{myBundle.ViewPannierLabel_pt}"/>
+                        <h:outputText value="#{pannierController.selected.pt}" title="#{myBundle.ViewPannierTitle_pt}"/>
+
+                        <h:outputText value="#{myBundle.ViewPannierLabel_pu}"/>
+                        <h:outputText value="#{pannierController.selected.pu}" title="#{myBundle.ViewPannierTitle_pu}"/>
+
+                        <h:outputText value="#{myBundle.ViewPannierLabel_designation}"/>
+                        <h:outputText value="#{pannierController.selected.designation}" title="#{myBundle.ViewPannierTitle_designation}"/>
+
+                        <h:outputText value="#{myBundle.ViewPannierLabel_quantite}"/>
+                        <h:outputText value="#{pannierController.selected.quantite}" title="#{myBundle.ViewPannierTitle_quantite}"/>
+
+                        <h:outputText value="#{myBundle.ViewPannierLabel_produitId}"/>
+                        <h:outputText value="#{pannierController.selected.produitId.id}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{myBundle.Close}" onclick="PannierViewDialog.hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

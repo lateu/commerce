@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="StockCreateDlg" widgetVar="StockCreateDialog" modal="true" resizable="false" appendToBody="true" header="#{myBundle.CreateStockTitle}">
+
+            <h:form id="StockCreateForm">
+
+                <h:panelGroup id="display">
+                 <!--    <p:panelGrid columns="2" rendered="#{stockController.selected != null}">
+
+                        <p:outputLabel value="#{myBundle.CreateStockLabel_codeProduit}" for="codeProduit" />
+                        <p:inputText id="codeProduit" value="#{stock.stockselected.codeProduit}" title="#{myBundle.CreateStockTitle_codeProduit}" />
+
+                        <p:outputLabel value="#{myBundle.CreateStockLabel_quantiteEnStock}" for="quantiteEnStock" />
+                        <p:inputText id="quantiteEnStock" value="#{stock.stockselected.quantiteEnStock}" title="#{myBundle.CreateStockTitle_quantiteEnStock}" required="true" requiredMessage="#{myBundle.CreateStockRequiredMessage_quantiteEnStock}"/>
+
+                       <p:outputLabel value="#{myBundle.CreateStockLabel_produitId}" for="produitId" />
+                        <p:selectOneMenu id="produitId" value="#{stockController.selected.produitId}" required="true" requiredMessage="#{myBundle.EditStockRequiredMessage_produitId}">
+                            <f:selectItem itemLabel="#{myBundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{produitController.items}"
+                                           var="produitIdItem"
+                                           itemValue="#{produitIdItem}"
+                                           itemLabel="#{produitIdItem.id.toString()}"
+                                           />
+                            <f:converter binding="#{produitConverter}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>-->
+                    <p:commandButton actionListener="{stock.}" value="#{myBundle.Save}" update="display,:StockListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,StockCreateDialog);"/>
+                    <p:commandButton value="#{myBundle.Cancel}" onclick="StockCreateDialog.hide();"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>
