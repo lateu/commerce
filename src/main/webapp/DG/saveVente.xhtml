@@ -87,7 +87,7 @@
                                     <p:commandButton id="editButton" action="#{ventebean.diminuerPannier()}"  onclick="submit();"  icon="ui-icon-pencil" value="Supprimer"/>
                                 </td> 
                             
-                              <td width="10%">   <h:commandButton value="imprimer" actionListener="#{pannier.pdf()}" id="withIcon1"  />  </td> 
+                                <td width="10%">   <h:commandButton disabled="#{ventebean.testImp}" value="imprimer" actionListener="#{pannier.pdf()}" id="withIcon1"  />  </td> 
 
       
                             </tr>

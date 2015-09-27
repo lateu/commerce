@@ -48,6 +48,7 @@ public class Ventebean implements Serializable {
     int recetteperiodique;
     private Date d1;
     private Date d2;
+    private boolean testImp = false;
 
     public Ventebean() {
     }
@@ -111,13 +112,13 @@ public class Ventebean implements Serializable {
     public void enregistrerPannier() throws ServiceException {
         int r;
         r = servVente.SavePanniers(servVente.NoneSave());
-        if(r!=0){
-        
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO," vente sauvegardée", ""));
+        if (r != 0) {
 
-        }else{
-        
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO," aucune vente sauvegardée", ""));
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, " vente sauvegardée", ""));
+            testImp = true;
+        } else {
+
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, " aucune vente sauvegardée", ""));
 
         }
 
@@ -228,5 +229,13 @@ public class Ventebean implements Serializable {
 
     public void setD2(Date d2) {
         this.d2 = d2;
+    }
+
+    public boolean isTestImp() {
+        return testImp;
+    }
+
+    public void setTestImp(boolean testImp) {
+        this.testImp = testImp;
     }
 }

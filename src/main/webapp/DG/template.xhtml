@@ -6,7 +6,7 @@
       xmlns:p="http://primefaces.org/ui">
 
     <h:head>
-        <title><ui:insert name="title">Default Title</ui:insert></title>
+        <title><ui:insert name="title">Administration</ui:insert></title>
         <h:outputStylesheet library="css" name="pfcrud.css"/>
         <h:outputScript library="scripts" name="pfcrud.js"/>
     </h:head>
@@ -16,13 +16,10 @@
         <p:growl id="growl" life="3000"/>
 
         <p:layout fullPage="true">
-            <p:layoutUnit position="north" size="90" header="">
+            <p:layoutUnit position="north" size="120" header="">
                 <!-- Menu here. Also a layout and a way to log a user out -->
                 <ui:include src="menusDG.xhtml"/>
             </p:layoutUnit>
-<!--
-            <p:layoutUnit position="west" size="50" />
-            <p:layoutUnit position="east" size="50"/>-->
 
             <p:layoutUnit position="south" size="60">
                 <ui:insert name="footer" ><p:panel style="background-color: skyblue; height: 85%;text-align: center"> &copy;: richard lateu(98-08-88-06/75-39-97-23)</p:panel></ui:insert>

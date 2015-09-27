@@ -5,14 +5,16 @@
 	http://www.springframework.org/schema/security
 	http://www.springframework.org/schema/security/spring-security-3.0.3.xsd">
 
-    <http auto-config="true">
-        <!--      <security:intercept-url pattern="/**" access="isAuthenticated()" />
-        <security:intercept-url pattern="/user/*" access="hasRole('ADMINISTRATOR')"/>-->
+    <http auto-config="true" >
         <intercept-url pattern="/DG/**" access="ROLE_ADMIN" />
         <intercept-url pattern="/CAISSIER/**" access="ROLE_CAISSIER" />
         <form-login login-page="/login" default-target-url="/welcome"
                     authentication-failure-url="/loginfailed" />
-        <logout logout-success-url="/logout" />
+        <logout logout-success-url="/logout" 
+                invalidate-session="true"
+        />
+        
+        <!--                 delete-cookies="JSESSIONID"-->
     </http>
 
     <authentication-manager>
